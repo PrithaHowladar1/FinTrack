@@ -1,0 +1,44 @@
+{% extends 'expenses/base.html' %}
+
+{% block title %}Transaction List{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h3 class="mb-4 text-center fw-semibold text-primary">Expense List</h3>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Description</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Category</th>
+              <th scope="col">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for expense in expenses %}
+            <tr>
+              <td>{{ expense.date }}</td>
+              <td>{{ expense.description }}</td>
+              <td>${{ expense.amount|floatformat:2 }}</td>
+              <td>{{ expense.category }}</td>
+              <td>{{ expense.category_type }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5" class="text-center text-muted">No expenses found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="text-end mt-3">
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">← Back to Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

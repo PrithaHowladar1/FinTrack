@@ -1,0 +1,63 @@
+{% extends "expenses/base.html" %}
+
+{% block title %}Dashboard - Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Header -->
+  <div class="text-center mb-5">
+    <h1 class="display-5 fw-semibold text-dark">Welcome To Your Financial Dashboard</h1>
+    <p class="fs-5 text-muted">Track your income, expenses, and financial trends with clarity</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <h6 class="text-uppercase text-success mb-2">Total Income</h6>
+          <div class="fs-2 fw-bold text-success">$+{{ total_income }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <h6 class="text-uppercase text-danger mb-2">Total Expense</h6>
+          <div class="fs-2 fw-bold text-danger">$-{{ total_expense }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <h2 class="h5 text-center mb-4 fw-semibold text-dark">📊 Financial Overview</h2>
+  <div class="row g-4 mb-5 align-items-stretch">
+    <!-- Monthly Expense Trend -->
+    <div class="col-md-6 d-flex">
+      <div class="card border-0 shadow-sm flex-fill d-flex flex-column justify-content-between">
+        <div class="card-body text-center">
+          <h6 class="fw-bold mb-3">📈 Your Monthly Trend</h6>
+          <img src="{{ trend_chart|safe }}" alt="Trend Chart" class="img-fluid rounded mt-3" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Expense Pie -->
+    <div class="col-md-6 d-flex">
+      <div class="card border-0 shadow-sm flex-fill d-flex flex-column justify-content-between">
+        <div class="card-body text-center">
+          <h6 class="fw-bold mb-3">📈 Expense Breakdown</h6>
+          <img src="{{ expense_pie|safe }}" alt="Expense Pie" class="img-fluid rounded mt-3" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="text-center">
+    <a href="{% url 'add_expense' %}" class="btn btn-primary btn-lg px-4 me-3 shadow-sm">➕ Add Expense</a>
+    <a href="{% url 'transactions' %}" class="btn btn-outline-secondary btn-lg px-4 shadow-sm">📄 View Transactions</a>
+  </div>
+</div>
+{% endblock %}

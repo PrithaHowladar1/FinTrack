@@ -1,0 +1,29 @@
+{% extends 'expenses/base.html' %}
+
+{% block title %}Add Expense{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow-sm p-4" style="width: 100%; max-width: 700px;">
+    <h3 class="mb-4 text-center fw-semibold text-primary">Add New Expense</h3>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="row mb-3 align-items-center">
+        <label class="col-sm-3 col-form-label fw-medium text-end" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <div class="col-sm-9">
+          {{ field }}
+          {% if field.errors %}
+            <div class="text-danger small">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary fw-semibold">➕ Add Expense</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">← Back to Dashboard</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
